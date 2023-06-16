@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Firebase Chat</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    /* CSS styles here */
+/* Global styles */
+* {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* Chat styles */
+    .chat-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-box {
+      height: 300px;
+      overflow-y: scroll;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .message {
+      margin-bottom: 10px;
+    }
+
+    .message strong {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .message p {
+      margin: 5px 0;
+    }
+
+    .input-container {
+      display: flex;
+      padding: 10px;
+    }
+
+    .input-container input[type="text"] {
+      flex: 1;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .input-container button {
+      margin-left: 10px;
+      padding: 8px 15px;
+      font-size: 14px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .input-container button:hover {
+      background-color: #45a049;
+    }
+
+    /* Footer styles */
+    .footer {
+      background-color: #333;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .footer p {
+      margin-bottom: 10px;
+    }
+
+    .footer input[type="text"] {
+      padding: 8px;
+      font-size: 14px;
+      border: none;
+      border-radius: 3px;
+    }
+
+    .footer button {
+      padding: 8px 15px;
+      font-size: 14px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .footer button:hover {
+      background-color: #45a049;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 500px) {
+      .chat-container {
+        width: 100%;
+        border-radius: 0;
+      }
+
+      .footer {
+        border-top: 1px solid #666;
+        padding: 10px;
+        font-size: 12px;
+      }
+
+      .footer p,
+      .footer input[type="text"],
+      .footer button {
+        font-size: 12px;
+      }
+    }
+    /* ... */
+
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox"></div>
+    <div class="input-container">
+      <input type="text" id="nameInput" placeholder="Your Name" />
+      <input type="text" id="messageInput" placeholder="Type your message" />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Email: <a href="mailto:am3507962@gmail.com">am3507962@gmail.com</a></p>
+    <div>
+      <input type="text" placeholder="Your message" />
+      <button>Send</button>
+    </div>
+    <p>
+      <a href="https://twitter.com/adelmoh74076199">
+        <img src="https://img.shields.io/twitter/follow/adelmoh74076199?style=social&logo=twitter" alt="Twitter">
+      </a>
+      <a href="https://www.linkedin.com/in/adel-mohammed-salem-962577208/">
+        <img src="https://img.shields.io/badge/-Adel%20Mohammed-0077B5?style=for-the-badge&logo=Linkedin&logoColor=white" alt="LinkedIn">
+      </a>
+      <a href="https://t.me/TeleBot_001">
+        <img src="https://img.shields.io/badge/-Adel%20Mohammed-0077B5?style=for-the-badge&logo=Telegram&logoColor=white" alt="Telegram">
+      </a>
+      <a href="https://www.instagram.com/adel_mohammed_gx/">
+        <img src="https://img.shields.io/badge/-adel__mohammed__gx-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram">
+      </a>
+      <a href="https://m.facebook.com/profile.php?eav=Afav1P2cpeiAlb6pwvfiCOq2Qe1I9IsWZ55bKSZM7tEQokZ8DnBde6A5qGBGkWdlBNw&paipv=0">
+        <img src="https://img.shields.io/badge/-adel__mohammed__salem-3B5998?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook">
+      </a>
+      <a href="https://join.slack.com/t/the-program-global/shared_invite/zt-1wjvgda84-PZTtdBmWcCsMC3j71BhoDw">
+        <img src="https://img.shields.io/badge/-The__Program__Global-4A154B?style=for-the-badge&logo=slack&logoColor=white" alt="Slack">
+      </a>
+      <a href="https://github.com/adelmohammed3652">
+        <img src="https://img.shields.io/badge/-adelmohammed3652-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+      </a>
+      <a href="https://www.youtube.com/channel/UCGkwPMCdr9GB0zKTy2aTgog">
+        <img src="https://img.shields.io/badge/-Adel__Mohammed-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
+      </a>
+    </p>
+    <p>Phone Number: 54632145</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862855.4688100946!2d26.208473194853213!3d39.93336549713057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cabe416c36e63f%3A0x98c6f7ad6c46cb83!2sTurkey!5e0!3m2!1sen!2sus!4v1623847017571!5m2!1sen!2sus" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+ 
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+    apiKey: "AIzaSyBUaqoBi_Etcal4dtKmMihjTR-rr0Gz--I",
+    authDomain: "chat-cd829.firebaseapp.com",
+    projectId: "chat-cd829",
+    storageBucket: "chat-cd829.appspot.com",
+    messagingSenderId: "593943249986",
+    appId: "1:593943249986:web:571a6258ba397eb1d919db"
+  };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Reference to the chat messages in Firebase
+    var messagesRef = firebase.database().ref('messages');
+
+    // Function to send a message
+    function sendMessage() {
+      var name = document.getElementById('nameInput').value;
+      var message = document.getElementById('messageInput').value;
+
+      // Save the message to Firebase
+      messagesRef.push().set({
+        name: name,
+        message: message
+      });
+
+      // Clear the input fields
+      document.getElementById('nameInput').value = '';
+      document.getElementById('messageInput').value = '';
+    }
+
+    // Function to display the chat messages
+    messagesRef.on('child_added', function(snapshot) {
+      var message = snapshot.val();
+      var chatBox = document.getElementById('chatBox');
+
+      var messageElement = document.createElement('div');
+      messageElement.classList.add('message');
+
+      var nameElement = document.createElement('strong');
+      nameElement.innerText = message.name + ': ';
+
+      var messageTextElement = document.createElement('p');
+      messageTextElement.innerText = message.message;
+
+      messageElement.appendChild(nameElement);
+      messageElement.appendChild(messageTextElement);
+
+      chatBox.appendChild(messageElement);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+  </script>
+</body>
+</html>
